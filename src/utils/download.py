@@ -39,7 +39,6 @@ class DownloadBase:
         # -c copy -bsf:a aac_adtstoasc -movflags +faststart output.mp4
         self.raw_stream_url = None
         self.filename_prefix = config.get('filename_prefix')
-        self.use_live_cover = config.get('use_live_cover', False)
         self.opt_args = opt_args
         # 是否是下载模式 跳过下播检测
         self.is_download = True
