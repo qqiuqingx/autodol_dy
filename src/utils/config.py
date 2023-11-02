@@ -1,20 +1,12 @@
-import json
+
 import pathlib
-import shutil
+
 from collections import UserDict
 
 import tomli as tomllib
 
 
 class Config(UserDict):
-    def load_cookies(self):
-        self.data["user"] = {"cookies": {}}
-        with open('cookies.json', encoding='utf-8') as stream:
-            s = json.load(stream)
-            for i in s["cookie_info"]["cookies"]:
-                name = i["name"]
-                self.data["user"]["cookies"][name] = i["value"]
-            self.data["user"]["access_token"] = s["token_info"]["access_token"]
 
     def load(self, file):
         import yaml
