@@ -3,10 +3,7 @@ import pathlib
 import shutil
 from collections import UserDict
 
-try:
-    import tomllib
-except ModuleNotFoundError:
-    import tomli as tomllib
+import tomli as tomllib
 
 
 class Config(UserDict):
