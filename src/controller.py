@@ -6,8 +6,7 @@ import logging
 logger = logging.getLogger('biliup')
 def add_job(room_id):
     url = f"live.douyin.com/{room_id}"
-    print(room_id,'roomid')
-    print(url,'url')
+    logging.info(f'添加任务:{url}')
     return add_dict(room_id,my_function,url)
 
 def getAlljob():
@@ -35,9 +34,7 @@ def stopjob(roomid):
 
 def add_new_routes(app):
 
-    # app.add_url_rule('/hello', view_func=hello2)
-    # app.add_url_rule('/home', view_func=home)
-    app.add_url_rule('/add_job/<room_id>', view_func=add_job)
+    app.add_url_rule('/addjob/<room_id>', view_func=add_job)
     app.add_url_rule('/getAlljob', view_func=getAlljob)
     app.add_url_rule('/getjob/<roomid>', view_func=getjob)
     app.add_url_rule('/stopjob/<roomid>', view_func=stopjob)

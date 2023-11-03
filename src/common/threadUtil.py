@@ -9,8 +9,6 @@ thread_max=config.get('thread_max',5)
 executor=ThreadPoolExecutor(thread_max)
 def add_dict(key,task_function, *args, **kwargs):
     with global_executor_dict_lock:
-        # print("add "+key)
-        # print(len(global_executor_dict))
         if not checkCount():
             return "超过线程数量"
         executor_instance= global_executor_dict.get(key)
