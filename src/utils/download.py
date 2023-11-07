@@ -206,7 +206,7 @@ class DownloadBase:
                 print('tet:',ret,get_dict(room_id).isFinish)
                 
             except:
-                logger.exception('Uncaught exception:')
+                logger.error('Uncaught exception:')
             finally:
                 self.close()
             if not ret:
@@ -273,10 +273,10 @@ class DownloadBase:
     #                 logger.info(
     #                     f'封面下载成功：{self.__class__.__name__} - {self.fname}：{os.path.abspath(self.live_cover_path)}')
     #             else:
-    #                 logger.warning(
+    #                 logger.error(
     #                     f'封面下载失败：{self.__class__.__name__} - {self.fname}：封面格式不支持：{self.live_cover_url}')
     #         except:
-    #             logger.exception(f'封面下载失败：{self.__class__.__name__} - {self.fname}')
+    #             logger.error(f'封面下载失败：{self.__class__.__name__} - {self.fname}')
 
     @staticmethod
     def rename(file_name):
@@ -285,10 +285,10 @@ class DownloadBase:
             os.rename(file_name + '.part', file_name)
             logger.info(f'更名 {file_name + ".part"} 为 {file_name}')
         except FileNotFoundError:
-            logger.warning(f'文件不存在: {file_name}')
+            logger.error(f'文件不存在: {file_name}')
         except FileExistsError:
             os.rename(file_name + '.part', file_name)
-            logger.warning(f'更名 {file_name + ".part"} 为 {file_name} 失败, {file_name} 已存在')
+            logger.error(f'更名 {file_name + ".part"} 为 {file_name} 失败, {file_name} 已存在')
 
     @property
     def file_name(self):

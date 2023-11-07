@@ -35,10 +35,10 @@ class Douyin(DownloadBase):
                     logger.info(f"{Douyin.__name__}: {self.url}: 未开播")
                     return False
             except (KeyError, IndexError):
-                logger.warning(f"{Douyin.__name__}: {self.url}: 获取房间ID失败,请检查Cookie设置")
+                logger.error(f"{Douyin.__name__}: {self.url}: 获取房间ID失败,请检查Cookie设置")
                 return False
             except:
-                logger.warning(f"{Douyin.__name__}: {self.url}: 获取房间ID失败")
+                logger.error(f"{Douyin.__name__}: {self.url}: 获取房间ID失败")
                 return False
         else:
             try:
@@ -46,7 +46,7 @@ class Douyin(DownloadBase):
                 if not room_id:
                     raise
             except:
-                logger.warning(f"{Douyin.__name__}: {self.url}: 直播间地址错误")
+                logger.error(f"{Douyin.__name__}: {self.url}: 直播间地址错误")
                 return False
 
         if room_id[0] == "+":
@@ -63,8 +63,8 @@ class Douyin(DownloadBase):
             else:
                 room_info = {}
         except Exception as e:
-            logger.warning(f"{Douyin.__name__}: {self.url}: 获取失败")
-            logger.warning(f"An exception occurred: {e}")
+            logger.error(f"{Douyin.__name__}: {self.url}: 获取失败")
+            logger.error(f"An exception occurred: {e}")
         
             return False
 
@@ -114,7 +114,7 @@ class Douyin(DownloadBase):
             self.raw_stream_url = stream_data[quality]['main']['flv']
             self.room_title = room_info['title']
         except:
-            logger.warning(f"{Douyin.__name__}: {self.url}: 解析错误")
+            logger.error(f"{Douyin.__name__}: {self.url}: 解析错误")
             return False
         return True
 

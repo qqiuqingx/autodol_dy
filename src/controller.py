@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger('biliup')
 def add_job(room_id):
     url = f"live.douyin.com/{room_id}"
-    logging.info(f'添加任务:{url}')
+    logger.info(f'添加任务:{url}')
     return add_dict(room_id,my_function,url)
 
 def getAlljob():

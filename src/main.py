@@ -5,13 +5,16 @@ from flask import Flask
 
 import logging.config
 import sys
-
+class infoFilter(logging.Filter):
+    def filter(self, record):
+        # 自定义过滤条件
+        return record.levelno == logging.INFO
 def create_app():
     app = Flask(__name__)
-
+    logging.config.dictConfig(LOG_CONF)
     # 初始化数据
     config.load(None)
-    logging.config.dictConfig(LOG_CONF)
+ 
     # 添加其他配置
     # app.config['DEBUG'] = True
 
@@ -40,22 +43,37 @@ LOG_CONF = {
             'formatter': 'simple'
         },
         'file': {
-            'level': logging.DEBUG,
+            'level': logging.INFO,
             'class': 'common.log.SafeRotatingFileHandler',
             'when': 'W0',
             'interval': 1,
             'backupCount': 1,
-            'filename': 'download2.log',
+            'filename': 'download.log',
+            'formatter': 'verbose',
+            'filters': ['custom_filter']  # 过滤器'
+        },
+        'error': {
+            'level': logging.ERROR,
+            'class': 'common.log.SafeRotatingFileHandler',
+            'when': 'W0',
+            'interval': 1,
+            'backupCount': 1,
+            'filename': 'error.log',
             'formatter': 'verbose'
-        }
+        }        
     },
     'root': {
         'handlers': ['console'],
-        'level': logging.INFO,
+        'level': logging.DEBUG,
+    },
+    'filters': {
+        'custom_filter': {
+            '()': infoFilter,
+        },
     },
     'loggers': {
         'biliup': {
-            'handlers': ['file'],
+            'handlers': ['file','error'],
             'level': logging.INFO,
         },
     }
