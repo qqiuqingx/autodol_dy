@@ -50,6 +50,7 @@ LOG_CONF = {
             'backupCount': 1,
             'filename': 'download.log',
             'formatter': 'verbose',
+            'encoding': 'utf-8',
             'filters': ['custom_filter']  # 过滤器'
         },
         'error': {
@@ -59,6 +60,7 @@ LOG_CONF = {
             'interval': 1,
             'backupCount': 1,
             'filename': 'error.log',
+            'encoding': 'utf-8',
             'formatter': 'verbose'
         }        
     },
