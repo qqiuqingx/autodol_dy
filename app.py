@@ -5,5 +5,5 @@ app=create_app()
 add_new_routes(app=app)
 
 if __name__ == "__main__":
-
-    app.run(port=10020)
+    
+    app.run(host='0.0.0.0',port=10038)

@@ -55,7 +55,7 @@ LOG_CONF = {
             'filename': 'download.log',
             'formatter': 'verbose',
             'encoding': 'utf-8',
-            'suffix': '%Y-%m-%d',  # 自定义时间戳格式
+            # 'suffix': '%Y-%m-%d',  # 自定义时间戳格式
             'filters': ['custom_filter']  # 过滤器'
         },
         'error_log': {

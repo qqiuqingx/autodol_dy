@@ -11,11 +11,8 @@ class Config(UserDict):
     def load(self, file):
         import yaml
         if file is None:
-            if pathlib.Path('config.yaml').exists():
-                file = open('config.yaml', 'rb')
-            elif pathlib.Path('config.toml').exists():
-                self.data['toml'] = True
-                file = open('config.toml', "rb")
+            if pathlib.Path('data/config.yaml').exists():
+                file = open('data/config.yaml', 'rb')
             else:
                 raise FileNotFoundError('未找到配置文件，请先创建配置文件')
         with file as stream:
