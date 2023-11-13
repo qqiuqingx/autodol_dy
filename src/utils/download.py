@@ -6,14 +6,12 @@ import sys
 import time
 from typing import Generator, List
 from urllib.parse import urlparse
-from common.threadUtil import add_dict,get_all_dict,get_dict
+from ..common.threadUtil import get_dict
 sys.path.append("..")
-import requests
-import stream_gears
-#from PIL import Image
 
-from utils.config import config
-from utils.db import DB as db
+
+from ..utils.config import config
+from ..utils.db import DB as db
 
 logger = logging.getLogger('biliup')
 

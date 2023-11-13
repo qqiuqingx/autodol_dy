@@ -6,11 +6,11 @@ from urllib.parse import unquote, urlparse, parse_qs, urlencode, urlunparse
 
 import requests
 # from . import logger, match1
-from utils.config import config
+from .utils.config import config
 #from .Danmaku import DanmakuClient
-from utils.tools import NamedLock
+from .utils.tools import NamedLock
 
-from utils.download import DownloadBase
+from .utils.download import DownloadBase
 
 
 logger = logging.getLogger('biliup')

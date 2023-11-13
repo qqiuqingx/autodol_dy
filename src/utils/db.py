@@ -2,7 +2,7 @@ import time
 from datetime import datetime
 import sys
 sys.path.append("..")
-from common.models import StreamerInfo, db
+from ..common.models import StreamerInfo, db
 
 
 def struct_time_to_datetime(date: time.struct_time):

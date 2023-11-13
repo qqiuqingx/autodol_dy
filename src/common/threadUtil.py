@@ -1,5 +1,5 @@
 import threading
-from utils.config import config
+from ..utils.config import config
 from concurrent.futures import ThreadPoolExecutor
 from .models import threadtt
         

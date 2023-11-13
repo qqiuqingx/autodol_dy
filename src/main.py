@@ -1,6 +1,9 @@
 
-from utils.config import config
+from .utils.config import config
 from flask import Flask
+from .common.log import SafeRotatingFileHandler
+
+
 
 
 import logging.config
@@ -44,21 +47,24 @@ LOG_CONF = {
         },
         'file': {
             'level': logging.INFO,
-            'class': 'common.log.SafeRotatingFileHandler',
-            'when': 'W0',
+             'class': 'logging.handlers.TimedRotatingFileHandler',
+            #'class': 'logging.FileHandler',
+            'when': 'midnight',
             'interval': 1,
-            'backupCount': 1,
+            'backupCount': 7,
             'filename': 'download.log',
             'formatter': 'verbose',
             'encoding': 'utf-8',
+            'suffix': '%Y-%m-%d',  # 自定义时间戳格式
             'filters': ['custom_filter']  # 过滤器'
         },
-        'error': {
+        'error_log': {
             'level': logging.ERROR,
-            'class': 'common.log.SafeRotatingFileHandler',
-            'when': 'W0',
+            #'class': 'common.log.SafeRotatingFileHandler',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'when': 'midnight',
             'interval': 1,
-            'backupCount': 1,
+            'backupCount': 7,
             'filename': 'error.log',
             'encoding': 'utf-8',
             'formatter': 'verbose'
@@ -75,7 +81,7 @@ LOG_CONF = {
     },
     'loggers': {
         'biliup': {
-            'handlers': ['file','error'],
+            'handlers': ['error_log','file'],
             'level': logging.INFO,
         },
     }

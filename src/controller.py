@@ -1,7 +1,7 @@
-from common.threadUtil import add_dict,get_all_dict,get_dict,remove_dict
+from .common.threadUtil import add_dict,get_all_dict,get_dict,remove_dict
 from flask import jsonify
-from douyin import Douyin
-from common.models import jobdetailed
+from .douyin import Douyin
+from .common.models import jobdetailed
 import logging
 logger = logging.getLogger('biliup')
 def add_job(room_id):
@@ -11,6 +11,8 @@ def add_job(room_id):
 
 def getAlljob():
     jobs=[]
+    logger.info(f'添加任务info:')
+    logger.error(f'添加任务err:')
     global_executor_dict=get_all_dict()
     for key in global_executor_dict.keys():
         threadtt=global_executor_dict.get(key)
