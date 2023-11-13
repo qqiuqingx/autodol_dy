@@ -1,0 +1,119 @@
+######### 全局录播与上传设置 #########
+#------录制与下载------#
+### 选择全局默认的下载插件，默认为stream-gears。可选：
+### 1.streamlink(streamlink配合ffmpeg混合下载模式，适合用于下载hls_fmp4与hls_ts流，因为streamlink支持多线程拉取）。
+### 使用该模式下载flv流时，将会仅使用ffmpeg。请手动安装streamlink以及ffmpeg。
+### 2.ffmpeg（纯ffmpeg下载），请手动安装ffmpeg。
+### 3.stream-gears
+downloader: ffmpeg
+### 录像单文件大小限制，单位Byte，超过此大小分段下载
+#file_size: 2147483648
+file_size: 52428800
+### 录像单文件时间限制，格式'00:00:00'（时分秒），超过此大小分段下载，如需使用大小分段请注释此字段
+#segment_time: '00:50:00'
+### 小于此大小的视频文件将会被过滤删除，单位MB
+filtering_threshold: 20
+### 自定义录播文件名模板, 支持变量 {streamer}:你在配置里设置的直播间名 %Y-%m-%d %H_%M_%S:创建文件的时间, {title}:当场直播间标题
+### 如果上传文件，文件名必须包含设定的模板名。其次，如果没有定义时间，文件分片可能会互相覆盖，所以推荐设置时间来避免分段文件名重复。
+#filename_prefix: '{streamer}%Y-%m-%d %H_%M_%S{title}'
+thread_max: 41
+
+
+
+
+
+
+
+
+#------抖音------#
+### 录制抖音弹幕，默认关闭【目前暂时不支持视频按时长分段下的弹幕文件自动分段，只有使用ffmpeg（包括streamlink混合模式）作为下载器才支持】
+#douyin_danmaku: false
+### 抖音自选画质
+### 刚开播可能没有除了原画之外的画质 会先录制原画 后续视频分段(仅ffmpeg streamlink)时录制设置的画质
+### origin 原画,uhd 蓝光,hd 超清,sd 高清,ld 标清,md 流畅
+### 没有选中的画质则会自动选择相近的画质优先低清晰度
+#douyin_quality: origin
+
+
+
+
+
+
+################### 用户cookie ###################
+### 在填了cookies的情况下优先使用cookies上传，如需使用用户名密码上传请注释掉cookies
+user:
+
+    #------抖音------#
+    ### 如需要录制抖音www.douyin.com/user/类型链接或被风控
+    ### 请在此填入cookie需要__ac_nonce、__ac_signature、sessionid 的值请不要将所有cookie填入
+    douyin_cookie: ''
+
+
+
+
+######### 日志输出配置 #########
+LOGGING:
+    formatters:
+        verbose:
+            format: '%(asctime)s %(filename)s[line:%(lineno)d](Pid:%(process)d Tname:%(threadName)s) %(levelname)s %(message)s'
+            datefmt: '%Y-%m-%d %H:%M:%S'
+        simple:
+            format: '%(filename)s%(lineno)d[%(levelname)s]Tname:%(threadName)s %(message)s'
+    handlers:
+        console:
+            level: DEBUG
+            class: logging.StreamHandler
+            formatter: simple
+            stream: ext://sys.stdout
+        file:
+            level: DEBUG
+            class: biliup.common.log.SafeRotatingFileHandler
+            when: W0
+            interval: 1
+            backupCount: 1
+            filename: ds_update.log
+            formatter: verbose
+    root:
+        handlers: [ console ]
+        level: INFO
+    loggers:
+        biliup:
+            handlers: [ file ]
+            level: INFO
+
+
+
+
+
+######### 日志输出配置 #########
+LOGGING:
+    formatters:
+        verbose:
+            format: '%(asctime)s %(filename)s[line:%(lineno)d](Pid:%(process)d Tname:%(threadName)s) %(levelname)s %(message)s'
+            datefmt: '%Y-%m-%d %H:%M:%S'
+        simple:
+            format: '%(filename)s%(lineno)d[%(levelname)s]Tname:%(threadName)s %(message)s'
+    handlers:
+        console:
+            level: DEBUG
+            class: logging.StreamHandler
+            formatter: simple
+            stream: ext://sys.stdout
+        file:
+            level: DEBUG
+            class: biliup.common.log.SafeRotatingFileHandler
+            when: W0
+            interval: 1
+            backupCount: 1
+            filename: ds_update.log
+            formatter: verbose
+    root:
+        handlers: [ console ]
+        level: INFO
+    loggers:
+        biliup:
+            handlers: [ file ]
+            level: INFO
+
+### 默认通过网页接口上传,可选通过操作chrome上传,此时需要填写chromedriver路径
+#chromedriver_path: /usr/local/bin/chromedriver
