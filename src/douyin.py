@@ -118,11 +118,11 @@ class Douyin(DownloadBase):
             return False
         return True
 
-    def danmaku_download_start(self, filename):
-        if self.douyin_danmaku:
-            #self.danmaku = DanmakuClient(self.url, filename + "." + self.suffix)
+    # def danmaku_download_start(self, filename):
+    #     if self.douyin_danmaku:
+    #         #self.danmaku = DanmakuClient(self.url, filename + "." + self.suffix)
     
-            self.danmaku.start()
+    #         self.danmaku.start()
 
     def close(self):
         if self.danmaku:

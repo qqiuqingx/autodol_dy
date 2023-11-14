@@ -11,8 +11,6 @@ def add_job(room_id):
 
 def getAlljob():
     jobs=[]
-    logger.info(f'添加任务info:')
-    logger.error(f'添加任务err:')
     global_executor_dict=get_all_dict()
     for key in global_executor_dict.keys():
         threadtt=global_executor_dict.get(key)
@@ -34,12 +32,15 @@ def stopjob(roomid):
     threadtt.setFinish()
     return jsonify({'Finish':threadtt.isFinish})
 
+def test():
+    return jsonify({'test':'success'})
 def add_new_routes(app):
 
     app.add_url_rule('/addjob/<room_id>', view_func=add_job)
     app.add_url_rule('/getAlljob', view_func=getAlljob)
     app.add_url_rule('/getjob/<roomid>', view_func=getjob)
     app.add_url_rule('/stopjob/<roomid>', view_func=stopjob)
+    app.add_url_rule('/test', view_func=test)
 
 
 def my_function(url):

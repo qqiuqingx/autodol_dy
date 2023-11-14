@@ -11,7 +11,7 @@ sys.path.append("..")
 
 
 from ..utils.config import config
-from ..utils.db import DB as db
+
 
 logger = logging.getLogger('biliup')
 
@@ -85,22 +85,9 @@ class DownloadBase:
         # filename = self.get_filename()
         fmtname = time.strftime(filename.encode("unicode-escape").decode()).encode().decode("unicode-escape")
 
-        self.danmaku_download_start(fmtname)
 
-        if self.downloader == 'streamlink':
-            parsed_url = urlparse(self.raw_stream_url)
-            path = parsed_url.path
-            if '.flv' in path:  # streamlink无法处理flv,所以回退到ffmpeg
-                return self.ffmpeg_download(fmtname)
-            else:
-                return self.streamlink_download(fmtname)
-        elif self.downloader == 'ffmpeg':
-            return self.ffmpeg_download(fmtname)
-            
+        return self.ffmpeg_download(fmtname)    
 
-        stream_gears_download(self.raw_stream_url, self.fake_headers, filename, config.get('segment_time'),
-                              config.get('file_size'))
-        return True
 
     def streamlink_download(self, filename):  # streamlink+ffmpeg混合下载模式，适用于下载hls流
         streamlink_input_args = ['--stream-segment-threads', '3', '--hls-playlist-reload-attempts', '1']
@@ -177,7 +164,7 @@ class DownloadBase:
             # 
             return False
         get_dict(self.roomid).nickname=self.nickname
-        file_name = self.file_name
+        file_name = 'data/'+self.file_name
         #file_name = self.nickname+self.id_str
         retval = self.download(file_name)
         self.rename(f'{file_name}.{self.suffix}')
@@ -228,9 +215,6 @@ class DownloadBase:
             # 内部使用时间戳传递
             'end_time': end_time,
         }
-        # 如果用户在上传前退出并删除文件，可能导致数据库中记录未删除
-        if not db.add_stream_info(**stream_info):
-            db.update_stream_info(**stream_info)
 
         return stream_info
 
