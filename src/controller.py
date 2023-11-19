@@ -36,7 +36,7 @@ def test():
     return jsonify({'test':'success'})
 def add_new_routes(app):
 
-    app.add_url_rule('/addjob/<room_id>', view_func=add_job)
+    app.add_url_rule('/add/<room_id>', view_func=add_job)
     app.add_url_rule('/jobs', view_func=getAlljob)
     app.add_url_rule('/getjob/<roomid>', view_func=getjob)
     app.add_url_rule('/stop/<roomid>', view_func=stopjob)
@@ -45,15 +45,10 @@ def add_new_routes(app):
 
 def my_function(url):
     try:
-      suffix = "mp4"  # 指定文件后缀
-      child_instance = Douyin('fname', url, suffix=suffix)  # 创建子类对象
-      download_instance = child_instance  # 将子类对象赋值给父类变量
-    # download_instance = DownloadBase(fname, url, suffix=suffix, opt_args=download_args)
-    # 开始下载
-
-      download_instance.start()
+      
+      child_instance = Douyin('fname',url=url).start()  # 创建子类对象
     finally:
-         success=remove_dict(download_instance.roomid)
+         success=remove_dict(child_instance.roomid)
          logger.info(f'删除任务:{url}---{success}')
-        # download_instance.rename(f'{download_instance.file_name}.{download_instance.suffix}')
+
      

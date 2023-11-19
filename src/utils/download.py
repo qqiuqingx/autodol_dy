@@ -188,7 +188,7 @@ class DownloadBase:
             try:
                 print('开始')
                 ret = self.run()
-                print('tet:',ret,get_dict(room_id).isFinish)
+                print(f'结束,self.run():{ret},get_dict(room_id).isFinish:{get_dict(room_id).isFinish}')
                 
             except:
                 logger.error('Uncaught exception:')
@@ -263,7 +263,6 @@ class DownloadBase:
     @staticmethod
     def rename(file_name):
         try:
-            print('更名',file_name)
             os.rename(file_name + '.part', file_name)
             logger.info(f'更名 {file_name + ".part"} 为 {file_name}')
         except FileNotFoundError:

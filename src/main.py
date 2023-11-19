@@ -53,7 +53,7 @@ LOG_CONF = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 7,
-            'filename': 'download.log',
+            'filename': 'data/download.log',
             'formatter': 'verbose',
             'encoding': 'utf-8',
             # 'suffix': '%Y-%m-%d',  # 自定义时间戳格式
@@ -66,7 +66,7 @@ LOG_CONF = {
             'when': 'midnight',
             'interval': 1,
             'backupCount': 7,
-            'filename': 'error.log',
+            'filename': 'data/error.log',
             'encoding': 'utf-8',
             'formatter': 'verbose'
         }        
