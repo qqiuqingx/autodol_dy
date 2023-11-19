@@ -28,7 +28,8 @@ class JobResource(Resource):
         url = f"live.douyin.com/{room_id}"
         logger.info(f'添加任务:{url}')
         #return "add_dict(room_id, my_function, url)"
-        return add_dict(room_id, my_function, url)
+        rest=add_dict(room_id, my_function, url)
+        return {'data': rest}
 
     #获取所有
     def get(self):
@@ -59,7 +60,7 @@ class SingleJobResource(Resource):
 
 class TestResource(Resource):
     def get(self):
-        return {'test': 'success'}
+        return {'data': 'success'}
 
 def add_restful_routes(api):
  api.add_resource(JobResource, '/jobs')
