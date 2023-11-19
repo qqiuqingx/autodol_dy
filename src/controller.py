@@ -51,9 +51,9 @@ def my_function(url):
     # download_instance = DownloadBase(fname, url, suffix=suffix, opt_args=download_args)
     # 开始下载
 
-      success = download_instance.start()
+      download_instance.start()
     finally:
-        
-         logger.info('删除任务:',url,remove_dict(download_instance.roomid))
+         success=remove_dict(download_instance.roomid)
+         logger.info(f'删除任务:{url}---{success}')
         # download_instance.rename(f'{download_instance.file_name}.{download_instance.suffix}')
      
