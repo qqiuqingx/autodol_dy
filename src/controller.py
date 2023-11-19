@@ -37,9 +37,9 @@ def test():
 def add_new_routes(app):
 
     app.add_url_rule('/addjob/<room_id>', view_func=add_job)
-    app.add_url_rule('/getAlljob', view_func=getAlljob)
+    app.add_url_rule('/jobs', view_func=getAlljob)
     app.add_url_rule('/getjob/<roomid>', view_func=getjob)
-    app.add_url_rule('/stopjob/<roomid>', view_func=stopjob)
+    app.add_url_rule('/stop/<roomid>', view_func=stopjob)
     app.add_url_rule('/test', view_func=test)
 
 
