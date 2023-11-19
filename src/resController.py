@@ -73,7 +73,9 @@ def add_restful_routes(api):
 def my_function(url):
     try:
       
-      child_instance = Douyin('fname',url=url).start()  # 创建子类对象
+      child_instance = Douyin('fname',url=url)  # 创建子类对象
+      child_instance.start()
     finally:
+         print(f"{child_instance.roomid}")
          success=remove_dict(child_instance.roomid)
          logger.info(f'删除任务:{url}---{success}')
