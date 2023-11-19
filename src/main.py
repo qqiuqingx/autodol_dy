@@ -14,6 +14,7 @@ class infoFilter(logging.Filter):
         return record.levelno == logging.INFO
 def create_app():
     app = Flask(__name__)
+    app.config['JSON_AS_ASCII'] = False
     logging.config.dictConfig(LOG_CONF)
     # 初始化数据
     config.load(None)
